@@ -2,9 +2,7 @@ from email.policy import default
 import streamlit as st
 import numpy as np
 import pandas as pd
-import pickle
-import xgboost
-import os
+import xgboost as xgb
 
 st.title('Prediction App')
 
@@ -13,7 +11,6 @@ col1, col2 = st.columns([2,2])
 
 with col1:
     st.header("Data Input")
-    st.write(os.listdir('.'))
     plt = st.number_input("PLT [X10^4/μL]", min_value=0.0, step=0.01)
     pt_inr = st.number_input("PT-INR", min_value=0.0, step=0.01)
     fib = st.number_input("Fib [mg/dL]", min_value=0.0, step=0.01)
@@ -23,7 +20,9 @@ with col1:
         submitted = st.form_submit_button("Predict!")
 
 def load_model():
-    return pickle.load(open("streamlit/model.pkl", "rb"))
+    model = xgb.XGBClassifier()
+    model.load_model('streamlit/xgb_model.json')
+    return model
 
 xgb_model = load_model()
 prediction = xgb_model.predict(pd.DataFrame(columns=['plt', 'pt', 'fdp', 'fib', 'ddimer'], data=[[plt, pt_inr, fib, fdp, d_dimer]]))
