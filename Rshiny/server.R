@@ -3,21 +3,24 @@ library(xgboost)
 
 library(shiny)
 
+xgb_model <- readRDS("xbg_R")
+
 # サーバロジックの定義。ヒストグラムを描く
 shinyServer(function(input, output) {
 
-  # ヒストグラムを描くための式。
-  # この式は renderPlot にラップされている。つまり、
-  #
-  #  1) これは "reactive" であり、入力が変更されると
-  #     自動的に再実行される
-  #  2) この出力タイプは plot である
 
-  output$distPlot <- renderPlot({
-    x    <- faithful[, 2]  # Old Faithful Geyser data
-    bins <- seq(min(x), max(x), length.out = input$bins + 1)
+  output$text1 <- renderText({ 
+      input_df_raw <- data.frame(c(input$plt, input$pt, input$fdp, input$fib, input$ddimer))
 
-    # 指定された階級数(bin)でヒストグラムを描く
-    hist(x, breaks = bins, col = 'darkgray', border = 'white')
+      # numeric
+      input_df <- as.numeric(input_df_raw[,])
+      input_df[-1] <- input_df[-1] + 1
+
+      # log
+      input_df_log <- log(input_df)
+      input_df_transposed <- data.frame(t(input_df_log))
+      colnames(input_df_transposed) <- c('plt', 'pt', 'fdp', 'fib', 'ddimer')
+      pred_xgb <- predict(xgb_model, input_df_transposed)
+      paste("The prediction is ", pred_xgb)
   })
 })
