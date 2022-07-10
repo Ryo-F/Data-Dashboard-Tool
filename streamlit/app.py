@@ -21,7 +21,6 @@ with col1:
     with st.form("my_form"):
         submitted = st.form_submit_button("Predict!")
 
-@st.cache(allow_output_mutation=True)
 def load_model():
     return pickle.load(open("streamlit/model.pkl", "rb"))
 
