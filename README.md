@@ -28,10 +28,8 @@ Inside R console
 
 1. Create [Shinyapps.io ](https://www.shinyapps.io/) account
 2. Install `rsconnect` package(`install.packages("rsconnect")`)
-3. Connect account through R 
-<br>
-`rsconnect::setAccountInfo(name='NAME', token='TOKEN', secret='SECRET')
-`
-4. Deploy through rsconnect
-<br>
+3. Connect account through R <br>
+`rsconnect::setAccountInfo(name='NAME', token='TOKEN', secret='SECRET')`
+
+4. Deploy through rsconnect<br>
 `rsconnect::deployApp('Rshiny')`
