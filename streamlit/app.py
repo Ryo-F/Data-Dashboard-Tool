@@ -21,7 +21,7 @@ with col1:
 
 @st.cache(allow_output_mutation=True)
 def load_model():
-    return pickle.load(open("streamlit/model.pkl", "rb"))
+    return pickle.load(open("model.pkl", "rb"))
 
 xgb_model = load_model()
 prediction = xgb_model.predict(pd.DataFrame(columns=['plt', 'pt', 'fdp', 'fib', 'ddimer'], data=[[plt, pt_inr, fib, fdp, d_dimer]]))
