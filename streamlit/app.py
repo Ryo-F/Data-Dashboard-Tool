@@ -35,5 +35,5 @@ with col2:
     else:
         result = 'non-target'
     st.write('The prediction is '+ result)
-    st.write('Predicted probabilty is '+ '{:.2%}'.format(probability[0][0]) )
+    st.write('Predicted probabilty is '+ '{:.2%}'.format(probability[0][1]) )
 
