@@ -1,12 +1,11 @@
 library(shiny)
 
-# アプリケーションの UI 定義。ヒストグラムを描く
 shinyUI(fluidPage(
 
   # アプリケーションタイトル
   titlePanel("Prediction App"),
 
-  # サイドバー。階級数(bin)のためのスライダー
+  # サイドバー
   sidebarLayout(
     sidebarPanel(
       fluidRow(
@@ -39,9 +38,7 @@ shinyUI(fluidPage(
       )
     ),
 
-    # 生成された分布のプロットを表示する
     mainPanel(
-      # plotOutput("distPlot"),
       textOutput("text1")
  
     )
