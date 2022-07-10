@@ -3,6 +3,7 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import pickle
+import os
 
 st.title('Prediction App')
 
@@ -11,6 +12,7 @@ col1, col2 = st.columns([2,2])
 
 with col1:
     st.header("Data Input")
+    st.write(os.listdir('.'))
     plt = st.number_input("PLT [X10^4/μL]", min_value=0.0, step=0.01)
     pt_inr = st.number_input("PT-INR", min_value=0.0, step=0.01)
     fib = st.number_input("Fib [mg/dL]", min_value=0.0, step=0.01)
