@@ -1,4 +1,3 @@
-from email.policy import default
 import streamlit as st
 import numpy as np
 import pandas as pd
